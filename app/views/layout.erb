@@ -31,8 +31,11 @@
   </head>
   <body>
 	<h5>JobSniper, version 0.00001</h5>
-	<p><a href="/logout">logout</a></p>
+	<%if logged_in?%>
+		<p><a href="/logout">logout</a></p>
+	<%end%>
 	<hr>
+
 	<%=yield%>
   </body>
 </html>

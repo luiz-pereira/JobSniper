@@ -1,7 +1,9 @@
 class AppController < Sinatra::Base
 
+	require 'sinatra/flash'
 	enable :sessions
 	set :session_secret, "ultra-confidential"
+	register Sinatra::Flash
 
 	configure do
 		# set :public_folder, 'public'
@@ -9,6 +11,7 @@ class AppController < Sinatra::Base
 	end
 
 	get '/' do
+		flash[:error] = "Format of the email was wrong."
 		erb :home
 	end
 

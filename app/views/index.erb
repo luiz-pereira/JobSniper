@@ -1,0 +1,15 @@
+<table style="width:100%">
+  <tr>
+    <th>Title</th>
+    <th>Date</th>
+    <th>actions</th>
+  </tr>
+  <%@requests.each do |request|%>
+	<tr>
+		<td><%=request.name%></td>
+		<td><%=request.date_updated%></td>
+		<td><a href="/placeholder">edit</a></td>
+		<td><a href="/placeholder">delete</a></td>
+	</tr>
+  <%end%>
+</table>

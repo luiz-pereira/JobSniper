@@ -17,6 +17,7 @@ models:
 - users: has password and e-mail (has_many requests, has_many job_postings through requests)
 - request: has a user-id (belongs_to users, has_many job postings)
 - job: has a request_id, title and content
+- parameters: to be used in conjunction with requests (belongs_to requests).
 
 controllers:
 - appcontroller: overall handling of the application
