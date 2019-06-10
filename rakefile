@@ -1,0 +1,14 @@
+require_relative './config/environment'
+require 'sinatra/activerecord/rake'
+
+
+
+# Type `rake -T` on your command line to see the available rake tasks.
+
+task :reload do
+	load './app'
+end
+
+task :console do
+	pry.start
+end
