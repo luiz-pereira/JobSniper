@@ -3,28 +3,7 @@
   <head>
 	<%# <link rel="stylesheet" type="text/css" href="/app/views/style.css"/> %>
 	<style>
-		div form {text-align: center;}
-		input{font-size:24px;text-align: center;}
-		h2.form_title {text-align: center;}
-		#homepage {font-size:36px;text-align: center;}
-		img.homelogo{
-						display: block;
-						margin-left: auto;
-						margin-right: auto;
-						width: 50%;
-					}
-		#loginhome {
-						position:absolute;
-						left:800px;
-						top:450px;
-						font-size: 26px;
-					}
-		#signuphome {
-						position:absolute;
-						left:800px;
-						top:490px;
-						font-size: 26px;
-					}
+
 
 	</style>
     <title>JobSniper</title>
@@ -32,7 +11,11 @@
   <body>
 	<h5>JobSniper, version 0.00001</h5>
 	<%if logged_in?%>
-		<p><a href="/logout">logout</a></p>
+		<div>
+			<h2>Hello, <%=current_user.username%></h2>
+			<a href="/logout">logout</a><br>
+			<a href="/<%=current_user.username%>/home">my account</a>
+		</div>
 	<%end%>
 	<hr>
 

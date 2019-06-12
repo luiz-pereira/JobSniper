@@ -1,0 +1,37 @@
+<style>
+	div select {
+					position: absolute;
+					display: block;
+					margin-left: auto;
+					margin-right: auto;
+					font-size: 24px;
+					text-align: center;
+					left: 43%;
+					/* margin-left: 5%; */
+				}
+	div h2 {text-align:center}
+	input{
+					position: absolute;
+					display: block;
+					margin-left: auto;
+					margin-right: auto;
+					font-size: 24px;
+					text-align: center;
+					top: 50%;
+					left: 48%;
+					}
+</style>
+
+<div>
+	<h2>Please select the job titles</h2>
+	<form action="/<%=@user.username%>/requests/new" method='post'>
+		<select name="job_titles[]" size="5" multiple>
+			<option name="project_manager">Project Manager</option>
+			<option name="project_coordinator">Project Coordinator</option>
+			<option name="project_analyst">Project Analyst</option>
+			<option name="project_control">Project Control Officer</option>
+			<option name="business_analyst">Business Analyst</option>
+		</select>
+		<input type="submit" value="Proceed">
+	</form>
+</div>

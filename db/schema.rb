@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_10_180252) do
+ActiveRecord::Schema.define(version: 2019_06_12_010835) do
+
+  create_table "job_titles", force: :cascade do |t|
+    t.string "job_title"
+    t.integer "request_id"
+  end
 
   create_table "jobs", force: :cascade do |t|
     t.integer "request_id"
@@ -27,13 +32,17 @@ ActiveRecord::Schema.define(version: 2019_06_10_180252) do
     t.string "link"
   end
 
-  create_table "parameters", force: :cascade do |t|
-    t.integer "request_id"
-    t.string "include"
-    t.string "exclude"
+  create_table "locations", force: :cascade do |t|
     t.string "city"
     t.string "province"
     t.string "country"
+    t.integer "request_id"
+  end
+
+  create_table "parameters", force: :cascade do |t|
+    t.integer "request_id"
+    t.string "criteria"
+    t.boolean "exclude"
   end
 
   create_table "requests", force: :cascade do |t|
@@ -45,6 +54,7 @@ ActiveRecord::Schema.define(version: 2019_06_10_180252) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
+    t.string "email"
   end
 
 end
