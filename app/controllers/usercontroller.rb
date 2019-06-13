@@ -9,10 +9,10 @@ class UsersController < AppController
 		if !!User.find_by(email: params[:user][:email])
 			erb :signup_failure
 		else
-		params[:user][:username] = get_username(params[:user][:email])
-		user = User.create(params[:user])
-		session[:user_id] = user.id
-		redirect "/#{user.username}/home"
+			params[:user][:username] = get_username(params[:user][:email])
+			user = User.create(params[:user])
+			session[:user_id] = user.id
+			redirect "/#{user.username}/home"
 		end
 	end
 
@@ -22,7 +22,7 @@ class UsersController < AppController
 	end
 
 	post '/login' do
-		user = User.find_by(username: params[:user][:username])
+		user = User.find_by(email: params[:user][:email])
 		if user && user.authenticate(params[:user][:password])
 			session[:user_id] = user.id
 			redirect "/#{user.username}/home"
@@ -33,9 +33,17 @@ class UsersController < AppController
 
 	get '/:username/home' do
 		@user = current_user
-		redirect '/login' if !current_user
-		@requests = @user.requests
-		erb :user_home
+		if !current_user
+			redirect '/login'
+		else
+			@requests = @user.requests
+			erb :user_home
+		end
+	end
+
+	get '/logout' do
+		logout
+		redirect '/'
 	end
 
 	helpers do
