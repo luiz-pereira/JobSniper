@@ -16,3 +16,4 @@ gem 'thin'
 gem 'shotgun'
 gem "tux"
 gem "sinatra-flash"
+gem "nokogiri"

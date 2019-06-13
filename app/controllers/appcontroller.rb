@@ -1,8 +1,10 @@
 class AppController < Sinatra::Base
 
 	require 'sinatra/flash'
-	enable :sessions
+	# Rack::Session::Cookie
 	set :session_secret, "ultra-confidential"
+	enable :sessions
+	disable :protection
 	register Sinatra::Flash
 
 	configure do
@@ -11,7 +13,12 @@ class AppController < Sinatra::Base
 	end
 
 	get '/' do
-		erb :home
+		if logged_in?
+			user = current_user
+			redirect "/#{user.username}/home"
+		else
+			erb :home
+		end
 	end
 
 

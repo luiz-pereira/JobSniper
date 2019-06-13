@@ -4,6 +4,7 @@
 						left: 38%;
 						top:25%;
 						font-size: 24px;
+						width: 10%;
 					}
 
 	#include {
@@ -16,6 +17,7 @@
 						left: 60%;
 						top: 25%;
 						font-size: 24px;
+						width: 10%;
 					}
 
 	#exclude {
@@ -32,30 +34,28 @@
 </style>
 
 <div>
-	<form id="include" action="/<%=@user.username%>/requests/new/<%=@request.id%>/include" method="post">
+	<form id="include" action="/<%=@user.username%>/requests/new/<%=@reqest.id%>/include" method="post">
 		<label for="expression">Include:</label>
 		<input type="text" name="expression" placeholder="any expression">
 		<input type="submit" value="add">
 	</form>
-	<form id="exclude" action="/<%=@user.username%>/requests/new/<%=@request.id%>/exclude" method="post">
+	<form id="exclude" action="/<%=@user.username%>/requests/new/<%=@reqest.id%>/exclude" method="post">
 		<label for="expression">Exclude:</label>
 		<input type="text" name="expression" placeholder="any expression">
 		<input type="submit" value="add">
 	</form>
 	<select id="select_include" name="include" multiple>
-		<option value="volvo">Volvo</option>
-		<option value="saab">Saab</option>
-		<option value="fiat">Fiat</option>
-		<option value="audi">Audi</option>
+		<%@include.each do |inc|%>
+			<option value="<%=inc.criteria%>"><%=inc.criteria%></option>
+		<%end%>
 	</select>
 	<select id="select_exclude"name="exclude" multiple>
-		<option value="volvo">Volvo</option>
-		<option value="saab">Saab</option>
-		<option value="fiat">Fiat</option>
-		<option value="audi">Audi</option>
+		<%@exclude.each do |exc|%>
+			<option value="<%=exc.criteria%>"><%=exc.criteria%></option>
+		<%end%>
 	</select>
 
-	<form action="/<%=@user.username%>/requests" method="post">
+	<form action="/<%=@user.username%>/requests/<%=@reqest.id%>" method="post">
 		<input type="submit" id="submit" value="Make Request">
 	</form>
 

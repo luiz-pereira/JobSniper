@@ -1,4 +1,5 @@
 require 'bundler/setup'
+require 'open-uri'
 Bundler.require
 
 ActiveRecord::Base.establish_connection(
