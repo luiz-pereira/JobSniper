@@ -14,7 +14,7 @@ class RequestsController < AppController
 			request = Request.create #({:date_updated => Time.now})
 			user.requests << request
 			params[:job_titles].each do |job_title|
-				request.job_titles << JobTitle.create(:job_title => job_title)
+				request.job_titles << JobTitle.create(:job_title => job_title.split(' ').map(&:capitalize).join(' '))
 			end
 			request.locations << Location.create({:city => "Toronto", :province => "Ontario", :country => "Canada"})
 			user.save

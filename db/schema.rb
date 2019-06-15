@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_12_010835) do
+ActiveRecord::Schema.define(version: 2019_06_15_003804) do
 
   create_table "job_titles", force: :cascade do |t|
     t.string "job_title"
@@ -24,12 +24,14 @@ ActiveRecord::Schema.define(version: 2019_06_12_010835) do
     t.string "title"
     t.string "company"
     t.text "description"
-    t.string "type"
+    t.string "tipe"
     t.string "seniority"
     t.string "city"
     t.string "province"
     t.string "country"
     t.string "link"
+    t.string "summary"
+    t.string "criteria"
   end
 
   create_table "locations", force: :cascade do |t|

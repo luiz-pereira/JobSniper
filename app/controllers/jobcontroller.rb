@@ -8,10 +8,10 @@ class JobsController < AppController
 		@exclude = @reqest.parameters.select(&:exclude).map(&:criteria)
 		@location = @reqest.locations
 		#request last_updated grab for the database
-		scrape = Scraper.new
 		@titles.each do |title|
-			criteria = {:include => @include, :location => @location,:exclude => @exclude,:title => title}
-			scrape.scrape_indeed (criteria)
+			scrape = Scraper.new(@reqest,title)
+			attribs = {:include => @include, :location => @location,:exclude => @exclude,:title => title}
+			scrape.process_request(attribs)
 		end
 		erb :job
 	end
