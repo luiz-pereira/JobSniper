@@ -8,7 +8,9 @@ class Scraper
 
 	def process_request (params)
 		get_jobs (params)
-		clean_jobs (@criteria)
+		clean_jobs_by_title(@criteria)
+		get_description(@criteria)
+		clean_jobs_by_description(@criteria)
 	end
 
 	def get_jobs (params)
@@ -21,7 +23,6 @@ class Scraper
 			doc = Nokogiri::HTML(open(format_link(params)))
 			get_data(doc)
 		end
-		binding.pry
 	end
 
 	def format_link(params)
@@ -50,14 +51,28 @@ class Scraper
 		(doc.search("#searchCount").text.strip.gsub("Page 1 of ","").gsub("jobs","").strip.to_i / 50.00001 + 1).to_i
 	end
 
-	def clean_jobs (criteria)
-		binding.pry
-		jobs = @reqest.jobs.where(criteria: criteria)
-		jobs = jobs.select{|a|!a.title.include?(criteria)}
-		jobs.each{|a|a.destroy}
-		binding.pry
+	def clean_jobs_by_title(criteria)
+		@reqest.jobs.where("criteria=? AND title NOT LIKE ?", criteria, "%#{criteria}%").destroy_all
 	end
 
+	def get_description(criteria)
+		jobs = @reqest.jobs.where(criteria: criteria)
+		jobs.each do |job|
+			doc=Nokogiri::HTML(open(job.link))
+			job.description = doc.search(".jobsearch-jobDescriptionText").text.strip
+			job.save
+		end
+	end
+
+	def clean_jobs_by_description(criteria)
+		@reqest.parameters.each do |parameter|
+			if parameter.exclude
+				@reqest.jobs.where("criteria=? AND description LIKE ?", criteria, "%#{parameter.criteria}%").destroy_all
+			else
+				@reqest.jobs.where("criteria=? AND description NOT LIKE ?", criteria, "%#{parameter.criteria}%").destroy_all
+			end
+		end
+	end
 
 
 end
