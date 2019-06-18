@@ -4,7 +4,10 @@ The idea of this webapp is to help the user go searching through thousands of jo
 
 Hopefully, it will help short-list the postings that more closely suits the user, by removing the ones that doesn't conform to the stated requests.
 
-I've requested access to the indeed API, but I don't know if I will be allowed to do this, hence i am preparing myself to scrape the website if i need to.
+- The application will store job postings linked to an user's request
+- each user can see all their requests and update with new information from indeed
+- a link to the actual job posting is provided
+
 
 Views:
 - signup: simple form for creating a customer's account. contains e-mail and password
@@ -30,5 +33,10 @@ Other things:
 - I will try to get the website alive through github pages.
 - if i have time, i'll try to use azure or google for the database
 
-Luiz
 
+install:
+-run bundle install
+-run shotgun in terminal
+-navigate to localhost:9393
+
+License: https://opensource.org/licenses/MIT
